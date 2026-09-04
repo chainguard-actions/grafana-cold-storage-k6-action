@@ -1,0 +1,1 @@
+# grafana-cold-storage-k6-action
