@@ -1,0 +1,38 @@
+name: Test k6 run with default filename
+on:
+  workflow_dispatch:
+
+jobs:
+  test-default-filename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create a test.js at the workspace root (default filename)
+        run: |
+          cat > "$GITHUB_WORKSPACE/test.js" << 'EOF'
+          import { sleep } from 'k6';
+          import { check } from 'k6';
+
+          export const options = {
+            vus: 1,
+            iterations: 1,
+          };
+
+          export default function () {
+            const result = check(true, {
+              'always true': (v) => v === true,
+            });
+            sleep(0.1);
+          }
+          EOF
+
+      - name: Run k6 with default filename (test.js)
+        id: action
+        uses: .
+        with:
+          filename: 'test.js'
+
+      - name: Assert action completed successfully with default filename
+        run: |
+          echo "PASS: k6 action ran successfully with default filename test.js"

@@ -1,0 +1,20 @@
+name: Test k6 run with custom flags
+on:
+  workflow_dispatch:
+
+jobs:
+  test-custom-flags:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run k6 with custom VUs and iterations flags
+        id: action
+        uses: .
+        with:
+          filename: tests/fixtures/no-network-test.js
+          flags: '--vus 2 --iterations 2'
+
+      - name: Assert action completed successfully with custom flags
+        run: |
+          echo "PASS: k6 action ran successfully with custom flags"

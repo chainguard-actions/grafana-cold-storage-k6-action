@@ -1,0 +1,23 @@
+name: Main Workflow
+on: [push]
+permissions: {}
+jobs:
+  build:
+    name: Run load test using the action
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Run load test using action code from commit
+        uses: ./
+        with:
+          cloud: true
+          token: ${{ secrets.K6_TOKEN }}
+          flags: --vus 1 --duration 10s
+      - name: Run load test using actions tarball
+        uses: grafana/k6-action@1e9c55046702f865e9a66c44c1004f47f4d01922 # main
+        with:
+          cloud: true
+          token: ${{ secrets.K6_TOKEN }}
+          flags: --vus 1 --duration 10s

@@ -1,0 +1,19 @@
+name: Test basic k6 run
+on:
+  workflow_dispatch:
+
+jobs:
+  test-basic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run k6 with a simple no-network test script
+        id: action
+        uses: .
+        with:
+          filename: tests/fixtures/no-network-test.js
+
+      - name: Assert action completed successfully
+        run: |
+          echo "PASS: k6 action ran successfully"

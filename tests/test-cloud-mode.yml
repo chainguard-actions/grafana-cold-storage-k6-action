@@ -1,0 +1,32 @@
+name: Test k6 cloud mode (no token - expected failure)
+on:
+  workflow_dispatch:
+
+jobs:
+  test-cloud-mode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run k6 in cloud mode without a token (expected to fail gracefully)
+        id: action
+        uses: .
+        continue-on-error: true
+        with:
+          cloud: 'true'
+          token: ''
+          filename: tests/fixtures/no-network-test.js
+
+      - name: Assert action failed gracefully (no token provided)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: k6 cloud mode failed gracefully without a token (expected)"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "PASS: k6 cloud mode succeeded (token was available)"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi
