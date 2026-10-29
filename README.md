@@ -6,9 +6,9 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v0.3.1 | [`v0.3.1`](https://github.com/chainguard-actions/grafana-cold-storage-k6-action/tree/v0.3.1) | [`e4714b7`](https://github.com/grafana-cold-storage/k6-action/commit/e4714b734f2b0afaabeb7b4a69142745548ab9ec) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v0.3.1 | [`v0.3.1`](https://github.com/chainguard-actions/grafana-cold-storage-k6-action/tree/v0.3.1) | [`e4714b7`](https://github.com/grafana-cold-storage/k6-action/commit/e4714b734f2b0afaabeb7b4a69142745548ab9ec) | [`HARDENING.md`](https://github.com/chainguard-actions/grafana-cold-storage-k6-action/blob/v0.3.1/HARDENING.md) |
 
 ## Privacy
 
